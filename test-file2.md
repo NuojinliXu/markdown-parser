@@ -1,6 +1,5 @@
-# Title
+[a [nested link](a.com)](b.com)
 
-[a link!](https://something.com)
-[another link!](some-page.html)
+[a nested parenthesized url](a.com(()))
 
-some paragraph text after the links
+[some escaped \[ brackets \]](example.com)
