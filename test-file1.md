@@ -1,4 +1,4 @@
-`[a link`](url.com)
+a`bbb[a link`](url.com)
 
 [another link](`google.com)`
 
