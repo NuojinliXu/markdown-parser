@@ -15,17 +15,26 @@ public class MarkdownParse {
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
             if(openBracket == -1){
+             
                 break;
             }
             int backtick = markdown.indexOf("`",backindex);
             backindex = markdown.indexOf(")",currentIndex)+1;
-            if(backtick < openBracket && backtick != -1){
+            if(backtick < openBracket){
                 currentIndex = openBracket+1;
                 continue;
             }
             //System.out.println(openBracket);
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
+            //int empty = markdown.indexOf("\n", openParen+1);
+            //System.out.println("dudud" + openBracket);
+            //System.out.println(empty);
+           // while(empty != -1){
+               // openParen++;
+               // empty = markdown.indexOf(" ", openParen+1);
+
+           // }
             //System.out.println(closeBracket);
             //System.out.println(openParen);
             if(openParen == -1){
@@ -37,7 +46,12 @@ public class MarkdownParse {
                 continue;
             }
             */
+            openBracket = markdown.indexOf("[", currentIndex+1);
             int closeParen = markdown.indexOf(")", openParen);
+            if(closeParen > openBracket && openBracket != -1){
+                currentIndex += 2;
+                continue;
+            }
             int next_close_Paren = markdown.indexOf(")",closeParen+1);
             while(next_close_Paren == closeParen+1){
                 closeParen++;
@@ -52,11 +66,11 @@ public class MarkdownParse {
         return toReturn;
     }
 
-
     public static void main(String[] args) throws IOException {
-        Path fileName = Path.of("test-file2.md");
+        Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
 	    System.out.println(links);
     }
+
 }
